@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 
 class SearchBar extends React.Component {
     constructor() {
@@ -8,9 +9,16 @@ class SearchBar extends React.Component {
 
     }
 
-    onInputChange(term) {
-        this.setState({term: term.target.value});
-        this.props.onTermChange(term.target.value);
+    onInputChange(event) {
+        event.persist();
+        if (!this.debouncedFn) {
+            this.debouncedFn =  _.debounce(() => {
+                this.setState({term: event.target.value});
+                this.props.onTermChange(event.target.value);
+            }, 500);
+          }
+          this.debouncedFn();
+        
     }
 
     render() {
