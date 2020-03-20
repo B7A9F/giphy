@@ -15,7 +15,7 @@ class SearchBar extends React.Component {
             this.debouncedFn =  _.debounce(() => {
                 this.setState({term: event.target.value});
                 this.props.onTermChange(event.target.value);
-            }, 500);
+            }, 300);
           }
           this.debouncedFn();
         
