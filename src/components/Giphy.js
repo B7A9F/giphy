@@ -7,10 +7,11 @@ import '../styles/app.css';
 export default class Giphy extends React.Component {
     constructor() {
         super();
-
+        this.handleTermChange = this.handleTermChange.bind(this);
         this.state = {
             gifs: []
         }
+        
 
     }
 
@@ -25,7 +26,7 @@ export default class Giphy extends React.Component {
         .catch(console.log)
       }
 
-    handleTermChange = (term) => {
+    handleTermChange(term) {
         const url = `https://api.giphy.com/v1/gifs/search?q=${term.replace(/\s/g, '+')}&api_key=zUB4s1MAI4e44eDFB4baMW6WT9PRCclM`;
 
         request.get(url).then((res) => {
